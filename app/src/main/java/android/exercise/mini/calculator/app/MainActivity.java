@@ -9,7 +9,7 @@ import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
   @VisibleForTesting
   public SimpleCalculator calculator;
@@ -44,24 +44,41 @@ public class MainActivity extends AppCompatActivity {
     TextView textViewButton9 = findViewById(R.id.button9);
 
 //    - initial update main text-view based on calculator's output
-    textViewCalculatorOutput.setText(calculator.output());
+    textViewCalculatorOutput.setText(this.calculator.output());
 //    - set click listeners on all buttons to operate on the calculator and refresh main text-view
-    textViewButton0.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 0));
-    textViewButton1.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 1));
-    textViewButton2.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 2));
-    textViewButton3.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 3));
-    textViewButton4.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 4));
-    textViewButton5.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 5));
-    textViewButton6.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 6));
-    textViewButton7.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 7));
-    textViewButton8.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 8));
-    textViewButton9.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 9));
+    textViewButton0.setOnClickListener(this);
+    textViewButton1.setOnClickListener(this);
+    textViewButton2.setOnClickListener(this);
+    textViewButton3.setOnClickListener(this);
+    textViewButton4.setOnClickListener(this);
+    textViewButton5.setOnClickListener(this);
+    textViewButton6.setOnClickListener(this);
+    textViewButton7.setOnClickListener(this);
+    textViewButton8.setOnClickListener(this);
+    textViewButton9.setOnClickListener(this);
+    textViewClear.setOnClickListener(this);
+    textViewPlus.setOnClickListener(this);
+    textViewMinus.setOnClickListener(this);
+    textViewEquals.setOnClickListener(this);
+    viewBackSpace.setOnClickListener(this);
 
-    textViewClear.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"clear", 0));
-    textViewPlus.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput, "plus", 0));
-    textViewMinus.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput, "minus", 0));
-    textViewEquals.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput, "equal", 0));
-    viewBackSpace.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput, "delete", 0));
+
+//    textViewButton0.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 0));
+//    textViewButton1.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 1));
+//    textViewButton2.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 2));
+//    textViewButton3.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 3));
+//    textViewButton4.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 4));
+//    textViewButton5.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 5));
+//    textViewButton6.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 6));
+//    textViewButton7.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 7));
+//    textViewButton8.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 8));
+//    textViewButton9.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 9));
+//
+//    textViewClear.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"clear", 0));
+//    textViewPlus.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput, "plus", 0));
+//    textViewMinus.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput, "minus", 0));
+//    textViewEquals.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput, "equal", 0));
+//    viewBackSpace.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput, "delete", 0));
     //
   }
 
@@ -69,11 +86,68 @@ public class MainActivity extends AppCompatActivity {
   protected void onSaveInstanceState(@NonNull Bundle outState) {
     super.onSaveInstanceState(outState);
     // todo: save calculator state into the bundle
+    outState.putSerializable("calculator", this.calculator.saveState());
   }
 
   @Override
   protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
     super.onRestoreInstanceState(savedInstanceState);
     // todo: restore calculator state from the bundle, refresh main text-view from calculator's output
+    this.calculator.loadState(savedInstanceState.getSerializable("calculator"));
+    TextView textViewCalculatorOutput = findViewById(R.id.textViewCalculatorOutput);
+    textViewCalculatorOutput.setText(this.calculator.output());
+  }
+
+  @Override
+  public void onClick(View v) {
+    switch (v.getId()){
+      case R.id.button0:
+        this.calculator.insertDigit(0);
+        break;
+      case R.id.button1:
+        this.calculator.insertDigit(1);
+        break;
+      case R.id.button2:
+        this.calculator.insertDigit(2);
+        break;
+      case R.id.button3:
+        this.calculator.insertDigit(3);
+        break;
+      case R.id.button4:
+        this.calculator.insertDigit(4);
+        break;
+      case R.id.button5:
+        this.calculator.insertDigit(5);
+        break;
+      case R.id.button6:
+        this.calculator.insertDigit(6);
+        break;
+      case R.id.button7:
+        this.calculator.insertDigit(7);
+        break;
+      case R.id.button8:
+        this.calculator.insertDigit(8);
+        break;
+      case R.id.button9:
+        this.calculator.insertDigit(9);
+        break;
+      case R.id.buttonClear:
+        this.calculator.clear();
+        break;
+      case R.id.buttonBackSpace:
+        this.calculator.deleteLast();
+        break;
+      case R.id.buttonPlus:
+        this.calculator.insertPlus();
+        break;
+      case R.id.buttonMinus:
+        this.calculator.insertMinus();
+        break;
+      case R.id.buttonEquals:
+        this.calculator.insertEquals();
+        break;
+    }
+    TextView textViewCalculatorOutput = findViewById(R.id.textViewCalculatorOutput);
+    textViewCalculatorOutput.setText(this.calculator.output());
   }
 }
