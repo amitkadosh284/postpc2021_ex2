@@ -61,25 +61,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     textViewMinus.setOnClickListener(this);
     textViewEquals.setOnClickListener(this);
     viewBackSpace.setOnClickListener(this);
-
-
-//    textViewButton0.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 0));
-//    textViewButton1.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 1));
-//    textViewButton2.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 2));
-//    textViewButton3.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 3));
-//    textViewButton4.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 4));
-//    textViewButton5.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 5));
-//    textViewButton6.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 6));
-//    textViewButton7.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 7));
-//    textViewButton8.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 8));
-//    textViewButton9.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"digit", 9));
-//
-//    textViewClear.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput,"clear", 0));
-//    textViewPlus.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput, "plus", 0));
-//    textViewMinus.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput, "minus", 0));
-//    textViewEquals.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput, "equal", 0));
-//    viewBackSpace.setOnClickListener(new OutputChangeOnClick(this.calculator, textViewCalculatorOutput, "delete", 0));
-    //
   }
 
   @Override
